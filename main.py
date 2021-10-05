@@ -1,13 +1,16 @@
 import os
 import discord
-import requests
-import json
+from discord.ext import commands
+
 import random
 from replit import db
-
-
-client = discord.Client()
-
+import requests
+import json
+# import interactions
+description = " Macky, smol pp "
+intents = discord.Intents.default()
+intents.members = True
+client = commands.Bot(command_prefix='$', description=description, intents=intents)
 
 def get_quote():
   response = requests.get('https://zenquotes.io/api/random')
@@ -22,40 +25,29 @@ discouragments = [
   'You are worth nothing lmao'
 ]
 
-def update_discouragement(discouraging_message):
-  if discouragments in db.keys():
-    pass
-
-
-
 @client.event
 async def on_ready():
   print('You have a big pp {0.user} '.format(client))
 
 @client.event
 async def on_message(message):
-  if message.author == client.user:
-    return
-  
-  msg = message.content
+      if message.author == client.user:
+          return   
+      elif any(word in message.content for word in sad_words):
+          await message.channel.send(random.choice(discouragments))
+      await client.process_commands(message)
 
-  if msg.startswith('$howbigpp'):
-    await message.channel.send('U big pp man')
+def update_discouragement(discouraging_message):
+  if discouragments in db.keys():
+    pass
 
-  
-  if msg.startswith('$howppnitesh'):
-    await message.channel.send('nitesh big pp, like very big, like this big 8=====================D')
+@client.command()
+async def howbigpp(ctx):
+    await ctx.send("U big pp man")
 
-
-  if msg.startswith('$inspireusryan'):
+@client.command()
+async def inspireusryan(ctx):
     quote = get_quote()
-    await message.channel.send(quote)
-
-  if msg.startswith('$howgayami'):
-    await message.channel.send('U very gay man')
-
-  if any(word in msg for word in sad_words):
-    await message.channel.send(random.choice
-    (discouragments))
+    await ctx.send(quote)
 
 client.run(os.getenv('TOKEN'))
