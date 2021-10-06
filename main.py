@@ -55,4 +55,9 @@ async def inspireusryan(ctx):
 async def howgayami(ctx):
   await ctx.send("U gay man")
 
+@client.command()
+async def gaypercentage(ctx):
+  await ctx.send("69%")
+
+
 client.run(os.getenv('TOKEN'))
