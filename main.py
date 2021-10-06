@@ -80,5 +80,15 @@ async def ppsize(ctx):
         comment = "beeg pp"
     await ctx.send('your pp size is ' + '`8'+ ppsize + 'D`' + f'\n{comment}')
     
+@client.command()
+async def hug(ctx):
+  hug = ['https://media0.giphy.com/media/l8ooOxhcItowwLPuZn/giphy.gif?cid=ecf05e47mi97mmlb52g2bxt31izuo825cinr2tpge26yi17b&rid=giphy.gif&ct=g', 'https://media2.giphy.com/media/4No2q4ROPXO7T6NWhS/giphy.gif?cid=ecf05e47mi97mmlb52g2bxt31izuo825cinr2tpge26yi17b&rid=giphy.gif&ct=g', 'https://media4.giphy.com/media/U4LhzzpfTP7NZ4UlmH/giphy.gif?cid=ecf05e47mi97mmlb52g2bxt31izuo825cinr2tpge26yi17b&rid=giphy.gif&ct=g', 'https://media2.giphy.com/media/ZBQhoZC0nqknSviPqT/giphy.gif?cid=ecf05e47mi97mmlb52g2bxt31izuo825cinr2tpge26yi17b&rid=giphy.gif&ct=g'] 
+  await ctx.send(random.choice(hug))
+
+@client.command()
+async def pissoff(ctx):
+  pissoff = ['https://media0.giphy.com/media/4WF4YilkoC7sjzG3TY/giphy.gif?cid=ecf05e47ay6qhakebn5ymu5s8cbkqyyixnivnmr1e6nrlyig&rid=giphy.gif&ct=g', 'https://media4.giphy.com/media/13sY5MBe3khsly/giphy.gif?cid=ecf05e47iq1eiwuo34nihcswb9pzoemf7af0lyufvmney3ec&rid=giphy.gif&ct=g', 'https://tenor.com/view/i-think-i-found-something-look-adam-dimarco-randall-carpio-the-order-i-discovered-something-gif-18043211', 'https://media1.giphy.com/media/uYOgd0l1uRVbq/giphy.gif?cid=ecf05e47f57wwzqcthwlgdlo1uhep9tilfanq4jfwrk01phf&rid=giphy.gif&ct=g']
+  await ctx.send(random.choice(pissoff))    
+    
 
 client.run(os.getenv('TOKEN'))
