@@ -1,7 +1,7 @@
+#import stuff
 import os
 import discord
 from discord.ext import commands
-
 import random
 from replit import db
 import requests
@@ -41,6 +41,7 @@ def update_discouragement(discouraging_message):
   if discouragments in db.keys():
     pass
 
+#commands
 @client.command()
 async def howbigpp(ctx):
     await ctx.send("U big pp man")
@@ -49,5 +50,9 @@ async def howbigpp(ctx):
 async def inspireusryan(ctx):
     quote = get_quote()
     await ctx.send(quote)
+
+@client.command()
+async def howgayami(ctx):
+  await ctx.send("U gay man")
 
 client.run(os.getenv('TOKEN'))
