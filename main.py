@@ -53,11 +53,15 @@ async def inspireusryan(ctx):
 
 @client.command()
 async def howgayami(ctx):
-  await ctx.send("U gay man")
+  gayperc = random.randint(1,100)
+  await ctx.send("You are " + str(gayperc) + '% gay')
 
 @client.command()
-async def gaypercentage(ctx):
-  await ctx.send("69%")
-
+async def toss(ctx):
+  coin = random.randint(0,1)
+  if coin == 0:
+    await ctx.send("Heads")
+  if coin == 1:
+    await ctx.send('Tails')
 
 client.run(os.getenv('TOKEN'))
