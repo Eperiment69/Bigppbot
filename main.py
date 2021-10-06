@@ -63,5 +63,22 @@ async def toss(ctx):
     await ctx.send("Heads")
   if coin == 1:
     await ctx.send('Tails')
+    
+@client.command()
+async def ppsize(ctx):
+    rand1 = random.choice([True, False])
+    rand2 = random.randint(1,10)
+    print(rand1 and rand2)
+    if rand1 == True:
+        rand2 = int(rand2/2)
+        ppsize = "=" * rand2
+    else:
+        ppsize = "=" * rand2
+    if rand2 <= 5:
+        comment = "smol pp"
+    elif rand2 > 5:
+        comment = "beeg pp"
+    await ctx.send('your pp size is ' + '`8'+ ppsize + 'D`' + f'\n{comment}')
+    
 
 client.run(os.getenv('TOKEN'))
