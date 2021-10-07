@@ -22,7 +22,9 @@ sad_words = ["sad",'unhappy','depressed', 'wanna die', 'want to die', 'sed', 'bo
 discouragments = [
   'haha, sucks to be you',
   'Hope you give up',
-  'You are worth nothing lmao'
+  'You are worth nothing lmao',
+  'You are an accident',
+  'Never Gonna Give You Up'
 ]
 
 @client.event
@@ -93,12 +95,25 @@ async def pissoff(ctx):
 async def waifu(ctx):
   waifu = ['https://media3.giphy.com/media/sMeN0FzG7lsw8/giphy.gif?cid=ecf05e478m1b1bcp0ti6hd2xqqefq9jv0n2tzdu5jzspzkay&rid=giphy.gif&ct=g', 'https://media4.giphy.com/media/LML5ldpTKLPelFtBfY/giphy.gif?cid=ecf05e47jkynm5zvpscrlh47iafp2m25rbd80ubglsf87uz2&rid=giphy.gif&ct=g', 'https://media0.giphy.com/media/10YWqUivkQPeeJWD3u/giphy.gif?cid=ecf05e47brubnww16fff9x8azlzbuukr4lf5pj6rztuimlut&rid=giphy.gif&ct=g', 'https://media0.giphy.com/media/du1u1eYSXp0wo/giphy.gif?cid=ecf05e47wo9un68r4kgy8vxk25k2bytsdkv78xvdibmhyuxq&rid=giphy.gif&ct=g', 'https://media0.giphy.com/media/cxPtMDHG8Ljry/giphy.gif?cid=ecf05e47zntncg3nfwg7hx0lyc2ct9m2mlcxpf0fomyw4rfh&rid=giphy.gif&ct=g', 'https://media3.giphy.com/media/hZfBs4E6tCTc19njbD/giphy.gif?cid=ecf05e47xuk5a7xqrr8mu1qwiandty9jdvkeaq0arkjawp00&rid=giphy.gif&ct=g', 'https://media3.giphy.com/media/5os6xBZJEobuE3Wnmj/giphy.gif?cid=ecf05e47ive8dr3uye3o5vfhriv1iktn5m28tfrtiqcz4dvx&rid=giphy.gif&ct=g', 'https://media4.giphy.com/media/xF2i5FhIo3Igeuzt5t/giphy.gif?cid=ecf05e47x1j3rai599c59tvxm0tssydrafauzslg2iga48hc&rid=giphy.gif&ct=g', 'https://media3.giphy.com/media/gSGNyzkKeKFBS/giphy.gif?cid=ecf05e47pmvjqow3efzmr1owpm7i049kuo9b72xyl31lyv8c&rid=giphy.gif&ct=g', 'https://media1.giphy.com/media/Qcrmc6dbGyLMQ/giphy.gif?cid=ecf05e47l15fd653nxhpz1r5emiabrdk30p8qoxbqtsjix0z&rid=giphy.gif&ct=g']
   await ctx.send(random.choice(waifu))
-   
+  
 @client.command()
 async def nudes(ctx):
   link = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   #gif = 'http://dozydozy.tumblr.com/post/3750667564'
   await ctx.send(link)
+
+@client.command()
+async def dog(ctx):
+  link = 'https://api.thedogapi.com/v1/images/search'
+  response = requests.get(link)
+  response_json = json.loads(response.text)
+  link = response_json[0]['url']
+  await ctx.send(link)  
+
+@client.command()
+async def howsimpami(ctx):
+  simppercent = random.randint(1,100)
+  await ctx.send('You are '+ str(simppercent) + '% simp :smirk:')
 
 @client.command()
 async def cat(ctx):
