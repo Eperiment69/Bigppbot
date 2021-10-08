@@ -142,3 +142,6 @@ async def nsfw(ctx):
     await ctx.send("breh this is not an nsfw channel, you smol pp fellow")
 
 client.run(os.getenv('TOKEN'))  
+
+
+
