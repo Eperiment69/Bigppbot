@@ -6,7 +6,7 @@ import random
 from replit import db
 import requests
 import json
-from links import pissedoff, waifuu, topicsfw, topicnsfw
+from links import *
 # import interactions
 description = "A bot, with big pp"
 intents = discord.Intents.default()
@@ -57,7 +57,7 @@ async def inspireusryan(ctx):
 @client.command()
 async def howgayami(ctx):
   gayperc = random.randint(1,100)
-  await ctx.send("You are " + str(gayperc) + '% gay :rainbow_flag:')    
+  await ctx.send("You are " + str(gayperc) + '% gay :rainbow_flag:')
 
 @client.command()
 async def howsimpami(ctx):
@@ -103,6 +103,11 @@ async def ppsize(ctx):
     await ctx.send('your pp size is ' + '`8'+ ppsize + 'D`' + f'\n{comment}')
     
 @client.command()
+async def hug(ctx):
+  hug = hugs
+  await ctx.send(random.choice(hug))
+
+@client.command()
 async def pissoff(ctx):
   pissoff = pissedoff
   await ctx.send(random.choice(pissoff))  
@@ -116,6 +121,14 @@ async def waifu(ctx):
 async def nudes(ctx):
   link = 'https://media0.giphy.com/media/Ju7l5y9osyymQ/giphy.gif?cid=ecf05e47elbtxq3txc1cmkeqv4vd1fd74i41xjy5f5fznuwf&rid=giphy.gif&ct=g'
   await ctx.send(link + '\n no nudes here, only rickroll')
+
+@client.command()
+async def cat(ctx):
+  link = 'https://api.thecatapi.com/v1/images/search'
+  response = requests.get(link)
+  response_json = json.loads(response.text)
+  link = response_json[0]['url']
+  await ctx.send(link)
 
 @client.command()
 async def cat(ctx):
@@ -174,7 +187,22 @@ async def kill(ctx):
 async def gif_help(ctx):
   help = '```You can use the given gif commands:\n $nudes,\n $pissoff,\n $waifu,\n $cat,\n $dog,\n $sfw,\n $hug,\n $kick,\n $pat,\n $kill\n and a very secret command ;)```'
   await ctx.send(help)
-          
-client.run(os.getenv('TOKEN'))  
 
+async def sfw(ctx):
+    url = json.loads(requests.get('https://api.waifu.pics/sfw/' + str(random.choice(topicsfw))).text)["url"]
+    embed=discord.Embed(description="here's your pic :smirk:")
+    embed.set_image(url=url)
+    await ctx.send(embed=embed)
+
+@client.command()
+async def nsfw(ctx):
+  url = json.loads(requests.get('https://api.waifu.pics/nsfw/' + str(random.choice(topicnsfw))).text)["url"]
+  embed=discord.Embed(description="We know what you are gonna do with this pic :smirk:")
+  embed.set_image(url=url)
+  if ctx.channel.is_nsfw():
+    await ctx.send(embed=embed)
+  else:
+    await ctx.send("breh this is not an nsfw channel, you smol pp fellow")
+
+client.run(os.getenv('TOKEN'))  
 
