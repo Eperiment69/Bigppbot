@@ -6,7 +6,7 @@ import random
 from replit import db
 import requests
 import json
-from links import hugs, pissedoff, waifuu, topicsfw, topicnsfw
+from links import pissedoff, waifuu, topicsfw, topicnsfw
 # import interactions
 description = "A bot, with big pp"
 intents = discord.Intents.default()
@@ -57,7 +57,18 @@ async def inspireusryan(ctx):
 @client.command()
 async def howgayami(ctx):
   gayperc = random.randint(1,100)
-  await ctx.send("You are " + str(gayperc) + '% gay :rainbow_flag:')
+  await ctx.send("You are " + str(gayperc) + '% gay :rainbow_flag:')    
+
+@client.command()
+async def howsimpami(ctx):
+  simppercent = random.randint(1,100)
+  await ctx.send('You are '+ str(simppercent) + '% simp :smirk:')
+
+@client.command()
+async def howthotami(ctx):
+  thotpercent = random.randint(1,100)
+  await ctx.send('You are '+ str(thotpercent) + '% thot :peach:') 
+
 
 @client.command()
 async def toss(ctx):
@@ -66,6 +77,15 @@ async def toss(ctx):
     await ctx.send("Heads")
   if coin == 1:
     await ctx.send('Tails')
+
+@client.command()
+async def rr(ctx):
+  await ctx.send('You have started Russian Roulette')
+  bullets = random.randint(1,6)
+  if bullets == 6 or bullets == 3:
+    await ctx.send("Bang! You died, Try again")
+  else:
+    await ctx.send('You survived smol pp boi')
     
 @client.command()
 async def ppsize(ctx):
@@ -83,11 +103,6 @@ async def ppsize(ctx):
     await ctx.send('your pp size is ' + '`8'+ ppsize + 'D`' + f'\n{comment}')
     
 @client.command()
-async def hug(ctx):
-  hug = hugs
-  await ctx.send(random.choice(hug))
-
-@client.command()
 async def pissoff(ctx):
   pissoff = pissedoff
   await ctx.send(random.choice(pissoff))  
@@ -99,9 +114,8 @@ async def waifu(ctx):
   
 @client.command()
 async def nudes(ctx):
-  link = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-  #gif = 'http://dozydozy.tumblr.com/post/3750667564'
-  await ctx.send(link)
+  link = 'https://media0.giphy.com/media/Ju7l5y9osyymQ/giphy.gif?cid=ecf05e47elbtxq3txc1cmkeqv4vd1fd74i41xjy5f5fznuwf&rid=giphy.gif&ct=g'
+  await ctx.send(link + '\n no nudes here, only rickroll')
 
 @client.command()
 async def cat(ctx):
@@ -116,18 +130,13 @@ async def dog(ctx):
   link = 'https://api.thedogapi.com/v1/images/search'
   response = requests.get(link)
   response_json = json.loads(response.text)
-  link = response_json[0]['url']
-  await ctx.send(link)  
-
-@client.command()
-async def howsimpami(ctx):
-  simppercent = random.randint(1,100)
-  await ctx.send('You are '+ str(simppercent) + '% simp :smirk:')
-
+  link = response_json[0]["url"]
+  await ctx.send(link)
+    
 @client.command()
 async def sfw(ctx):
-    url = json.loads(requests.get('https://api.waifu.pics/sfw/' + str(random.choice(topicsfw))).text)["url"]
-    embed=discord.Embed(description="here's your pic :smirk:")
+    url = json.loads(requests.get('https://api.waifu.pics/sfw/' + str(random.choice(topicsfw))).text)['url']
+    embed=discord.Embed(description="here's your pic :smile:")
     embed.set_image(url=url)
     await ctx.send(embed=embed)
 
@@ -141,7 +150,31 @@ async def nsfw(ctx):
   else:
     await ctx.send("breh this is not an nsfw channel, you smol pp fellow")
 
-client.run(os.getenv('TOKEN'))  
+@client.command()
+async def hug(ctx):
+  url = json.loads(requests.get('https://api.waifu.pics/sfw/hug').text)['url']
+  await ctx.send(url)
 
+@client.command()
+async def kick(ctx):
+  url = json.loads(requests.get('https://api.waifu.pics/sfw/kick').text)['url']
+  await ctx.send(url)
+
+@client.command()
+async def pat(ctx):
+  url = json.loads(requests.get('https://api.waifu.pics/sfw/pat').text)['url']
+  await ctx.send(url) 
+
+@client.command()
+async def kill(ctx):
+  url = json.loads(requests.get('https://api.waifu.pics/sfw/kill').text)['url']
+  await ctx.send(url)
+
+@client.command()
+async def gif_help(ctx):
+  help = '```You can use the given gif commands:\n $nudes,\n $pissoff,\n $waifu,\n $cat,\n $dog,\n $sfw,\n $hug,\n $kick,\n $pat,\n $kill\n and a very secret command ;)```'
+  await ctx.send(help)
+          
+client.run(os.getenv('TOKEN'))  
 
 
