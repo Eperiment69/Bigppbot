@@ -1,6 +1,6 @@
 # Bigppbot
-this bot has very big pp, the biggest one you have even seen infact
-the bot has a fixed prefix and that is '$'
+this bot has very big pp, the biggest one you have even seen infact.
+the bot has a fixed prefix and that is '$'.
 it has the following commands:
 $inspireusryan : sends a random inspirational quote, 
 $howbigpp : reminds you that you are a big pp man,
@@ -33,8 +33,8 @@ $kill : sends a random gif of an anime character killing,
 $help : a very very basic help menu ,
 $gif_help: sends a list of all avaliable gifs commands
 
-there is also a not so very secret command that is... pretty nsfw to say the least and thats about it
+there is also a not so very secret command that is... pretty nsfw to say the least and thats about it.
 this bot is a combined effort of eperiment69, ryanGP-0 and mackdriod 
-all 3 of us are very begineer programmers hence why the bot is so simple
+all 3 of us are very begineer programmers hence why the bot is so simple.
 enjoy!
 
