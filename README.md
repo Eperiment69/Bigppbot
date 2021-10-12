@@ -33,8 +33,4 @@ $kill : sends a random gif of an anime character killing,
 $help : a very very basic help menu ,
 $gif_help: sends a list of all avaliable gifs commands
 
-there is also a not so very secret command that is... pretty nsfw to say the least and thats about it.
-this bot is a combined effort of eperiment69, ryanGP-0 and mackdriod 
-all 3 of us are very begineer programmers hence why the bot is so simple.
-enjoy!
 
