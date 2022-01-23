@@ -1,12 +1,13 @@
+#!/usr/bin/env python
 #import stuff
 import os
+import json
 import nextcord
 from nextcord.ext import commands
 import random
-from replit import db
+secrets = json.load(open('secrets.json'))
 import requests
 from jikanpy import Jikan
-import json
 from links import pissedoff, waifuu, topicsfw, topicnsfw
 # import interactions
 description = "A bot, with big pp"
@@ -84,7 +85,7 @@ async def rr(ctx):
     await ctx.send("Bang! You died, Try again")
   else:
     await ctx.send('You survived smol pp boi')
-    
+
 @client.command()
 async def ppsize(ctx):
     rand1 = random.choice([True, False])
@@ -171,13 +172,16 @@ async def kill(ctx):
 @client.command()
 async def anime(ctx, *anime):
   try:
-    output = jikan.search('anime', anime)
+    output = jikan.search('anime', anime, parameters={'limit': 1})
     embed = nextcord.Embed(title = output['results'][0]['title'], description = output['results'][0]['synopsis'])
-    embed.set_image(image = output['results'][0]['image_url'])
+    embed.add_field(name = 'Score: ', value = output['results'][0]['score'])
     embed.add_field(name = 'Eps', value = output['results'][0]['episodes'])
+    embed.set_image(url=output['results'][0]['image_url'])
+    embed.add_field(name = 'Rated: ', value = output['results'][0]['rated'])
+    embed.add_field(name = 'Date: ', value = output['results'][0]['start_date'] + ' - ' + output['results'][0]['end_date'])
     await ctx.send(embed=embed)
   except:
-    await ctx.send("an error occured")
+    await ctx.send("Not found")
 
 
 
@@ -237,4 +241,4 @@ async def bj(ctx):
   elif msg.content.lower() == "stand":
     await ctx.send('sup')
 
-client.run(os.getenv('TOKEN'))   
+client.run(secrets['TOKEN'])   
