@@ -2,6 +2,7 @@
 #import stuff
 import os
 import json
+
 import nextcord
 from nextcord.ext import commands
 import random
@@ -13,7 +14,7 @@ from links import pissedoff, waifuu, topicsfw, topicnsfw
 description = "A bot, with big pp"
 intents = nextcord.Intents.default()
 intents.members = True
-client = commands.Bot(command_prefix='1', description=description, intents=intents)
+client = commands.Bot(command_prefix='`', description=description, intents=intents)
 jikan = Jikan()
 
 def get_quote():
@@ -184,6 +185,13 @@ async def anime(ctx, *anime):
     await ctx.send("Not found")
 
 
+def make_decks(num):
+    new_deck = []
+    for i in range(num):
+        for j in range(4):
+            new_deck.extend(card_types)
+    random.shuffle(new_deck)
+    return new_deck
 
 @client.command()
 async def gif_help(ctx):
@@ -193,7 +201,10 @@ async def gif_help(ctx):
 @client.command()
 async def bj(ctx):
 
+  card_limit = 5
   hit_number = 21
+
+  
 
   random_number = random.randint(1,10)
   number_1 = random_number
@@ -201,6 +212,12 @@ async def bj(ctx):
   number_3 = random.randint(1,10)
   number_4 = random.randint(1,10)
   number_5 = random.randint(1,10)
+
+  o_number_1 = random.randint(1,10)
+  o_number_2 = random.randint(1,10)
+  o_number_3 = random.randint(1,10)
+  o_number_4 = random.randint(1,10)
+  o_number_5 = random.randint(1,10)
 
   classes = ['♣', '♥', '♠', '♦']
   _class = random.choice(classes)
@@ -212,8 +229,21 @@ async def bj(ctx):
   card_4 = str(number_4) + random.choice(classes)
   card_5 = str(number_5) + random.choice(classes)
 
-  await ctx.send(card_1)
-  await ctx.send("What do you wanna do, **hit** or **stand**")
+  o_card_1 = str(o_number_1) + random.choice(classes)
+  o_card_2 = str(o_number_2) + random.choice(classes) 
+  o_card_3 = str(o_number_3) + random.choice(classes)
+  o_card_4 = str(o_number_4) + random.choice(classes)
+  o_card_5 = str(o_number_5) + random.choice(classes)
+
+  embed = nextcord.Embed(title = 'Black Jack')
+
+  embed.add_field(name = 'Your cards', value = card_1)
+  embed.add_field(inline = False, name = 'Opponent Cards', value = o_card_1)
+  embed.add_field(inline = False, name = 'What do you want to do?', value = "***HIT*** or ***STAND***")
+  
+  await ctx.send(embed=embed)
+  #await ctx.send(card_1)
+  #await ctx.send("What do you wanna do, **hit** or **stand**")
 
   def check(m):
    return m.author == ctx.author and m.channel == ctx.channel and \
@@ -223,19 +253,79 @@ async def bj(ctx):
 
   if msg.content.lower() == "hit":
     if number_1 + number_2 < hit_number:
-      await ctx.send(card_1 + ',' +card_2)
-      await ctx.send("What do you wanna do, **hit** or **stand**")
+      embed = nextcord.Embed(title = 'Black Jack')
+      embed.add_field(inline = False, name = 'Opponent Cards', value = o_card_2 + ', ' + o_card_2)
+      embed.add_field(name='Your Cards', value = card_1 + ', ' + card_2)
+      embed.add_field(inline = False, name = 'What do you want to do?', value = "***HIT*** or ***STAND***")
+      await ctx.send(embed=embed)
+      #await ctx.send(card_1 + ',' +card_2)
+      #await ctx.send("What do you wanna do, **hit** or **stand**")
 
       msg_2 = await client.wait_for('message', check=check)
 
       if msg_2.content.lower() == "hit":
         if number_1 + number_2 + number_3 < hit_number:
-          await ctx.send(card_1 + ',' +card_2 + ',' + card_3)
-          await ctx.send("What do you wanna do, **hit** or **stand**")
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Opponent Cards', value = o_card_2 + ', ' + o_card_2 + ', ' + o_card_3)
+          embed.add_field(inline = False, name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3)
+          embed.add_field(inline = False, name = 'What do you want to do?', value = "***HIT*** or ***STAND***")
+          await ctx.send(embed=embed)
+          #await ctx.send(card_1 + ',' +card_2 + ',' + card_3)
+          #await ctx.send("What do you wanna do, **hit** or **stand**")
+        elif o_number_1 + o_number_2 + o_number_3 > hit_number:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Opponent Cards', value = o_card_1 + ', ' + o_card_2 + ', ' + o_card_3)
+          embed.add_field(name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3 + ', ' + 'The opponent went over 21, You Win!')
         else:
-          await ctx.send('More than 21, you lose' + ' ' + card_1 + ',' +card_2 + ',' + card_3)
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3 + ', ' + 'Your cards are more than 21, You lose!')
+          await ctx.send(embed=embed)
+          #await ctx.send('More than 21, you lose' + ' ' + card_1 + ',' +card_2 + ',' + card_3)
+    
+      msg_3 = await client.wait_for('message', check=check)
+
+      if msg_3.content.lower() == "hit":
+        if number_1 + number_2 + number_3 + number_4 > hit_number:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Opponent Cards', value = o_card_2 + ', ' + o_card_2 + ', ' + o_card_3)
+          embed.add_field(inline = False, name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3 + ', ' + card_4)
+          embed.add_field(inline = False, name = 'What do you want to do?', value = "***HIT*** or ***STAND***")
+          await ctx.send(embed=embed)
+          #await ctx.send(card_1 + ',' +card_2 + ',' + card_3)
+          #await ctx.send("What do you wanna do, **hit** or **stand**")
+        elif o_number_1 + o_number_2 + o_number_3 + o_number_4 > hit_number:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Opponent Cards', value = o_card_1 + ', ' + o_card_2 + ', ' + o_card_3 + ', ' + o_card_4)
+          embed.add_field(name = 'Your Cards', value = card_1 + ', ' + card_2 + ', ' + card_3 + ', ' + card_4 + ', ' + 'The opponent went over 21, You Win!')
+        else:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3 + ', ' + 'Your cards are more than 21, You lose!')
+          await ctx.send(embed=embed)
+          #await ctx.send('More than 21, you lose' + ' ' + card_1 + ',' +card_2 + ',' + card_3)
+
+      msg_4 = await client.wait_for('message', check=check)
+
+      if msg_4.content.lower() == "hit":
+        if number_1 + number_2 + number_3 + number_4 + number_5 > hit_number:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Opponent Cards', value = o_card_2 + ', ' + o_card_2 + ', ' + o_card_3)
+          embed.add_field(inline = False, name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3 + ', ' + card_4)
+          embed.add_field(inline = False, name = 'What do you want to do?', value = "***HIT*** or ***STAND***")
+          await ctx.send(embed=embed)
+          #await ctx.send(card_1 + ',' +card_2 + ',' + card_3)
+          #await ctx.send("What do you wanna do, **hit** or **stand**")
+        elif o_number_1 + o_number_2 + o_number_3 + o_number_4 + o_number_5 > hit_number:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Opponent Cards', value = o_card_1 + ', ' + o_card_2 + ', ' + o_card_3 + o_card_4 + ', ' + o_card_5)
+          embed.add_field(name = 'Your Cards', value = card_1 + ', ' + card_2 + ', ' + card_3 + ', ' + card_4 + ', ' + card_5 + ', ' + 'The opponent went over 21, You Win!')
+        else:
+          embed = nextcord.Embed(title = 'Black Jack')
+          embed.add_field(name = 'Your Cards', value = card_1 + ', ' +card_2 + ', ' + card_3 + ', ' + 'Your cards are more than 21, You lose!')
+          await ctx.send(embed=embed)
+          #await ctx.send('More than 21, you lose' + ' ' + card_1 + ',' +card_2 + ',' + card_3)
 
 
+  
     else:
       await ctx.send('More than 21, you lose' + ' ' + card_1 + ',' +card_2)
   elif msg.content.lower() == "stand":
