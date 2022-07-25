@@ -3,7 +3,6 @@
 
 import os
 import json
-
 import nextcord
 from nextcord.ext import commands
 import random
@@ -25,7 +24,6 @@ discouragments = [
   'You are an accident',
   'Never Gonna Give You Up'
 ]
-
 
 #functions 
 def get_quote():
@@ -83,7 +81,8 @@ async def on_message(message):
       if message.author == client.user:
           return   
       elif any(word in message.content for word in sad_words):
-          await message.channel.send(random.choice(discouragments))
+        if random.random() < 0.3:
+            await message.channel.send(random.choice(discouragments))
       await client.process_commands(message)
 
 #commands
@@ -237,9 +236,6 @@ async def anime(ctx, *anime):
     await ctx.send(embed=embed)
   except:
     await ctx.send("Not found")
-
-
-
 
 @client.command()
 async def gif_help(ctx):
