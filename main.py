@@ -105,6 +105,11 @@ async def meme(ctx):
       await ctx.send(embed=embed)
 
 @client.command()
+async def sauce(ctx):
+  gayperc = random.randint(1,100)
+  await ctx.send("Open sauce baby, send pr :3\nhttps://github.com/Eperiment69/Bigppbot/")  
+      
+@client.command()
 async def howgayami(ctx):
   gayperc = random.randint(1,100)
   await ctx.send("You are " + str(gayperc) + '% gay :rainbow_flag:')    
