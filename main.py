@@ -14,7 +14,7 @@ from links import pissedoff, waifuu, topicsfw, topicnsfw
 # import interactions
 description = "A bot, with big pp"
 intents = nextcord.Intents.all()
-client = commands.Bot(command_prefix='`', description=description, intents=intents)
+client = commands.Bot(command_prefix=commands.when_mentioned_or('`'), description=description, intents=intents)
 jikan = Jikan()
 
 sad_words = ["sad",'unhappy','depressed', 'wanna die', 'want to die', 'sed', 'bored']
