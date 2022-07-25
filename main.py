@@ -13,8 +13,7 @@ from jikanpy import Jikan
 from links import pissedoff, waifuu, topicsfw, topicnsfw
 # import interactions
 description = "A bot, with big pp"
-intents = nextcord.Intents.default()
-intents.members = True
+intents = nextcord.Intents.all()
 client = commands.Bot(command_prefix='`', description=description, intents=intents)
 jikan = Jikan()
 
