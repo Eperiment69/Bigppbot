@@ -16,7 +16,7 @@ intents = nextcord.Intents.all()
 client = commands.Bot(command_prefix=commands.when_mentioned_or('`'), description=description, intents=intents)
 jikan = Jikan()
 
-sad_words = ["sad",'unhappy','depressed', 'wanna die', 'want to die', 'sed', 'bored']
+sad_words = [' sad ',' unhappy ',' depressed ', ' wanna die ', ' want to die ', ' sed ', ' bored ',' lifeless ']
 discouragments = [
   'haha, sucks to be you',
   'Hope you give up',
@@ -75,13 +75,14 @@ def get_meme(self): # Get a meme from reddit
 @client.event
 async def on_ready():
   print('You have a big pp {0.user} '.format(client))
-
 @client.event
 async def on_message(message):
       if message.author == client.user:
-          return   
+          return
+      if len(message.content) > 30:
+          return
       elif any(word in message.content for word in sad_words):
-        if random.random() < 0.3:
+          if random.random() < 0.4:
             await message.channel.send(random.choice(discouragments))
       await client.process_commands(message)
 
